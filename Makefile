@@ -12,10 +12,12 @@ clean:
 	sudo docker-compose -f srcs/docker-compose.yml down -v
 
 fclean: clean
-	sudo rm -rf /home/data
-	sudo docker system prune --volumes --all --force
-	sudo docker network prune --force
-	sudo docker volume prune --force
+	sudo docker stop $(docker ps -qa)
+	sudo docker rm $(docker ps -qa)
+	sudo docker volume rm $(docker volume ls -q)
+	sudo docker network rm $(docker network ls -q) 2>dev/null
+	sudo rm -rf /home/yubae/data/wordpress/*
+	sudo rm -rf /home/yubae/data/mariadb/*
 
 re: fclean all
 
