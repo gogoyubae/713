@@ -54,5 +54,3 @@ services:
     networks:
       - intra
     restart: unless-stopped
-
-    # test
